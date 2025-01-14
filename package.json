@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "bin": {
-    "timezone-difference-cli": "./index.js"
+    "timezone-difference": "./index.js"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -27,6 +27,7 @@
   },
   "dependencies": {
     "enquirer": "^2.4.1",
-    "luxon": "^3.5.0"
+    "luxon": "^3.5.0",
+    "timezone-difference": "^1.0.0"
   }
 }
