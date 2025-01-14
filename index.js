@@ -58,7 +58,7 @@ async function main() {
     // ユーザーが指定した日付と時刻を作成
     const inputDate = `${year}-${month.padStart(2, "0")}-${day.padStart(
       2,
-      "0"
+      "0",
     )}T${hour.padStart(2, "0")}:00:00`;
 
     // 1つ目の都市のタイムゾーンに変換
@@ -83,7 +83,7 @@ async function main() {
     // 結果を表示
     const offsetDifferenceAbs = Math.abs(offsetDifference); // 絶対値を取得
     console.log(
-      `\n${city1}と${city2}の時差は${offsetDifferenceAbs} 時間です。`
+      `\n${city1}と${city2}の時差は${offsetDifferenceAbs} 時間です。`,
     );
 
     console.log(`${city1}の日時: ${city1Time.toFormat("yyyy/M/d HH:mm")}`);
