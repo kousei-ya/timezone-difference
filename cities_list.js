@@ -1,0 +1,23 @@
+module.exports = {
+  cities: {
+    東京: "Asia/Tokyo",
+    ニューヨーク: "America/New_York",
+    ロンドン: "Europe/London",
+    パリ: "Europe/Paris",
+    ロサンゼルス: "America/Los_Angeles",
+    カイロ: "Africa/Cairo",
+    ドバイ: "Asia/Dubai",
+    バンコク: "Asia/Bangkok",
+    上海: "Asia/Shanghai",
+    リオデジャネイロ: "America/Sao_Paulo",
+    南アフリカ: "Africa/Johannesburg",
+    ニュージーランド: "Pacific/Auckland",
+    インド: "Asia/Kolkata",
+    シカゴ: "America/Chicago",
+    シドニー: "Australia/Sydney",
+    モスクワ: "Europe/Moscow",
+    ハワイ: "Pacific/Honolulu",
+    アラスカ: "America/Anchorage",
+    ワシントンDC: "America/New_York",
+  },
+};
