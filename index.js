@@ -53,10 +53,9 @@ async function main() {
     });
     const hour = await hourPrompt.run();
 
-    const inputDate = `${year}-${month.padStart(2, "0")}-${day.padStart(
-      2,
-      "0"
-    )}T${hour.padStart(2, "0")}:00:00`;
+    const inputDate =
+      `${year}-${month.padStart(2, "0")}-${day.padStart(2, "0")}` +
+      `T${hour.padStart(2, "0")}:00:00`;
 
     const baseCityTime = DateTime.fromISO(inputDate, {
       zone: cities[baseCity],
