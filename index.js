@@ -8,7 +8,6 @@ async function main() {
   try {
     const cityChoices = Object.keys(cities);
 
-    // 1つ目の都市を選択
     const city1Prompt = new Select({
       name: "city1",
       message: "1つ目の都市を選んでください:",
@@ -16,7 +15,6 @@ async function main() {
     });
     const city1 = await city1Prompt.run();
 
-    // 日時を入力
     const yearPrompt = new Input({
       name: "year",
       message: "希望の年を入力してください (例: 2025):",
@@ -55,13 +53,11 @@ async function main() {
     });
     const hour = await hourPrompt.run();
 
-    // ユーザーが指定した日付と時刻を作成
     const inputDate = `${year}-${month.padStart(2, "0")}-${day.padStart(
       2,
-      "0",
+      "0"
     )}T${hour.padStart(2, "0")}:00:00`;
 
-    // 1つ目の都市のタイムゾーンに変換
     const city1Time = DateTime.fromISO(inputDate, { zone: cities[city1] });
 
     const city2Choices = cityChoices.filter((city) => city.name !== city1);
@@ -74,16 +70,13 @@ async function main() {
 
     const city2 = await city2Prompt.run();
 
-    // 2つ目の都市の日時を取得（1つ目の都市の時間を基に変換）
     const city2Time = city1Time.setZone(cities[city2]);
 
-    // 両都市のタイムゾーンオフセット差を計算
-    const offsetDifference = (city2Time.offset - city1Time.offset) / 60; // オフセット差を時間単位で計算
+    const offsetDifference = (city2Time.offset - city1Time.offset) / 60;
 
-    // 結果を表示
-    const offsetDifferenceAbs = Math.abs(offsetDifference); // 絶対値を取得
+    const offsetDifferenceAbs = Math.abs(offsetDifference);
     console.log(
-      `\n${city1}と${city2}の時差は${offsetDifferenceAbs} 時間です。`,
+      `\n${city1}と${city2}の時差は${offsetDifferenceAbs} 時間です。`
     );
 
     console.log(`${city1}の日時: ${city1Time.toFormat("yyyy/M/d HH:mm")}`);
