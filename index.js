@@ -8,12 +8,12 @@ async function main() {
   try {
     const cityChoices = Object.keys(cities);
 
-    const city1Prompt = new Select({
-      name: "city1",
-      message: "1つ目の都市を選んでください:",
+    const baseCityPrompt = new Select({
+      name: "baseCity",
+      message: "基準となる都市を選んでください:",
       choices: cityChoices,
     });
-    const city1 = await city1Prompt.run();
+    const baseCity = await baseCityPrompt.run();
 
     const yearPrompt = new Input({
       name: "year",
@@ -58,29 +58,38 @@ async function main() {
       "0"
     )}T${hour.padStart(2, "0")}:00:00`;
 
-    const city1Time = DateTime.fromISO(inputDate, { zone: cities[city1] });
-
-    const city2Choices = cityChoices.filter((city) => city.name !== city1);
-
-    const city2Prompt = new Select({
-      name: "city2",
-      message: "2つ目の都市を選んでください:",
-      choices: city2Choices,
+    const baseCityTime = DateTime.fromISO(inputDate, {
+      zone: cities[baseCity],
     });
 
-    const city2 = await city2Prompt.run();
+    const comparedCityChoices = cityChoices.filter(
+      (city) => city.name !== baseCity
+    );
 
-    const city2Time = city1Time.setZone(cities[city2]);
+    const comparedCityPrompt = new Select({
+      name: "comparedCity",
+      message: "比較する都市を選んでください:",
+      choices: comparedCityChoices,
+    });
 
-    const offsetDifference = (city2Time.offset - city1Time.offset) / 60;
+    const comparedCity = await comparedCityPrompt.run();
+
+    const comparedCityTime = baseCityTime.setZone(cities[comparedCity]);
+
+    const offsetDifference =
+      (comparedCityTime.offset - baseCityTime.offset) / 60;
 
     const offsetDifferenceAbs = Math.abs(offsetDifference);
     console.log(
-      `\n${city1}と${city2}の時差は${offsetDifferenceAbs} 時間です。`
+      `\n${baseCity}と${comparedCity}の時差は${offsetDifferenceAbs} 時間です。`
     );
 
-    console.log(`${city1}の日時: ${city1Time.toFormat("yyyy/M/d HH:mm")}`);
-    console.log(`${city2}の日時: ${city2Time.toFormat("yyyy/M/d HH:mm")}\n`);
+    console.log(
+      `${baseCity}の日時: ${baseCityTime.toFormat("yyyy/M/d HH:mm")}`
+    );
+    console.log(
+      `${comparedCity}の日時: ${comparedCityTime.toFormat("yyyy/M/d HH:mm")}\n`
+    );
   } catch (err) {
     console.error("エラーが発生しました:", err.message);
   }
